@@ -6,14 +6,28 @@ using UnityEngine;
 
 public class EnemyAuthoring : MonoBehaviour
 {
+    public List<EnemySO> enemiesSO;
     
     class EnemyAuthoringBaker : Baker<EnemyAuthoring>
     {
         public override void Bake(EnemyAuthoring authoring)
         {
             Entity enemyEntity = GetEntity(TransformUsageFlags.Dynamic);
+
+            List<EnemyData> enemyData = new List<EnemyData>();
             
             AddComponent<EnemySpawning>(enemyEntity);
+
+            foreach (EnemySO enemy in authoring.enemiesSO)
+            {
+                enemyData.Add(new EnemyData
+                {
+                    speed = enemy.speed,
+                    prefab = GetEntity(enemy.prefab, TransformUsageFlags.None)
+                });
+            }
+            
+            AddComponentObject(enemyEntity, new Enemy{enemies = enemyData});
         }
     }
 }

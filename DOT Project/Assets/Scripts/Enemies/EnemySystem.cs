@@ -10,17 +10,16 @@ public partial struct EnemySystem : ISystem
     {
         
     }
-
-    public void OnStartRunning()
+    
+    void OnStartRunning(ref SystemState state)
     {
         var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.TempJob);
         
         foreach (var (enemySpawning, transform) in SystemAPI.Query<EnemySpawning, LocalTransform>())
         {
             Entity[] newProjectile = new Entity[20];
-            
-        }
-        
+        }   
         
     }
+        
 }
