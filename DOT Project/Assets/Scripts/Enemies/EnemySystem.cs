@@ -1,25 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Transforms;
-using UnityEngine;
 
-public partial struct EnemySystem : ISystem
+namespace Enemies
 {
-    public void OnUpdate(ref SystemState state)
+    public partial class EnemySystem : SystemBase
     {
-        
-    }
-    
-    void OnStartRunning(ref SystemState state)
-    {
-        var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.TempJob);
-        
-        foreach (var (enemySpawning, transform) in SystemAPI.Query<EnemySpawning, LocalTransform>())
+        //public void OnUpdate(ref SystemState state)
+        //{
+        //    
+        //}
+
+
+        protected override void OnStartRunning()
         {
-            Entity[] newProjectile = new Entity[20];
-        }   
+            var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.TempJob);
         
+            foreach (var (enemySpawning, transform) in SystemAPI.Query<EnemySpawning, LocalTransform>())
+            {
+                Entity[] newProjectile = new Entity[20];
+            }
+
+            //foreach (Entity entity in newProjectile)
+            //{
+            //    
+            //}
+        }
+
+        protected override void OnUpdate()
+        {
+            throw new System.NotImplementedException();
+        }
     }
-        
 }

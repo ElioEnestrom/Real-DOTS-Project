@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class Enemy : IComponentData
 {
-    public List<EnemyData> enemies;
+    public List<EnemyData> Enemies;
 }
 
 public struct EnemySpawnerComponent : IComponentData
 {
-    public float enemySpawnCooldown;
+    public float EnemySpawnCooldown;
 }
 
 public struct EnemyData
 {
-    public Entity prefab;
-    public int speed;
+    public Entity Prefab;
+    public int Speed;
 }

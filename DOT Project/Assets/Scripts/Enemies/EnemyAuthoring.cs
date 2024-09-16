@@ -22,12 +22,12 @@ public class EnemyAuthoring : MonoBehaviour
             {
                 enemyData.Add(new EnemyData
                 {
-                    speed = enemy.speed,
-                    prefab = GetEntity(enemy.prefab, TransformUsageFlags.None)
+                    Speed = enemy.speed,
+                    Prefab = GetEntity(enemy.prefab, TransformUsageFlags.None)
                 });
             }
             
-            AddComponentObject(enemyEntity, new Enemy{enemies = enemyData});
+            AddComponentObject(enemyEntity, new Enemy{Enemies = enemyData});
         }
     }
 }
