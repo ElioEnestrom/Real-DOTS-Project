@@ -15,10 +15,10 @@ namespace Enemies
         {
             var ecb = new EntityCommandBuffer(Unity.Collections.Allocator.TempJob);
         
-            foreach (var (enemySpawning, transform) in SystemAPI.Query<EnemySpawning, LocalTransform>())
-            {
-                Entity[] newProjectile = new Entity[20];
-            }
+            //foreach (var (enemySpawning, transform) in SystemAPI.Query<EnemySpawning, LocalTransform>())
+            //{
+            //    Entity[] newProjectile = new Entity[20];
+            //}
 
             //foreach (Entity entity in newProjectile)
             //{
@@ -28,7 +28,7 @@ namespace Enemies
 
         protected override void OnUpdate()
         {
-            throw new System.NotImplementedException();
+            //hrow new System.NotImplementedException();
         }
     }
 }

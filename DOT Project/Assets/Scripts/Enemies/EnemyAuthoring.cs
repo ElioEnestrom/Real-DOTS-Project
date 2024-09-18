@@ -16,7 +16,7 @@ public class EnemyAuthoring : MonoBehaviour
 
             List<EnemyData> enemyData = new List<EnemyData>();
             
-            AddComponent<EnemySpawning>(enemyEntity);
+            //AddComponent<EnemySpawning>(enemyEntity);
 
             foreach (EnemySO enemy in authoring.enemiesSO)
             {
@@ -37,7 +37,7 @@ public struct EnemyMovement : IComponentData
     public float2 Value;
 }
 
-public struct EnemySpawning : IComponentData
-{
-    public Entity[] Value;
-}
+//public struct EnemySpawning : IComponentData
+//{
+//    public Entity[] Value;
+//}

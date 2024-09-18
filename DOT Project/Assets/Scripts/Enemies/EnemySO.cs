@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(fileName = "Enemy", menuName = "ScriptableObjects/Enemy")]
 public class EnemySO : ScriptableObject
 {
     public GameObject prefab;
