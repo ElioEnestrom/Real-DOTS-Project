@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class EnemyAuthoring : MonoBehaviour
 {
+    public float spawnCooldown = 1;
+    public Transform enemyPosition;
     public List<EnemySO> enemiesSO;
     
     class EnemyAuthoringBaker : Baker<EnemyAuthoring>
@@ -14,6 +16,12 @@ public class EnemyAuthoring : MonoBehaviour
         {
             Entity enemyEntity = GetEntity(TransformUsageFlags.Dynamic);
 
+            AddComponent(enemyEntity, new EnemySpawnerComponent()
+            {
+                EnemySpawnCooldown = authoring.spawnCooldown,
+                EnemyLocation = authoring.enemyPosition.transform.position
+            });
+            
             List<EnemyData> enemyData = new List<EnemyData>();
             
             //AddComponent<EnemySpawning>(enemyEntity);

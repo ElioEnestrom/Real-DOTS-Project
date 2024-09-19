@@ -4,6 +4,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public partial class EnemySpawningSystem : SystemBase
@@ -11,20 +12,24 @@ public partial class EnemySpawningSystem : SystemBase
     private EnemySpawnerComponent _enemySpawnerComponent;
     private Enemy _enemyDataComponent;
     private Entity _enemySpawnerEntity;
+    private const float SpawnOffset = 2.5f;
+
     protected override void OnUpdate()
     {
     }
 
     protected override void OnStartRunning()
     {
+        Debug.Log("What");
         if (!SystemAPI.TryGetSingletonEntity<EnemySpawnerComponent>(out _enemySpawnerEntity))
         {
             return;
         }
-
+        
         _enemySpawnerComponent = EntityManager.GetComponentData<EnemySpawnerComponent>(_enemySpawnerEntity);
         _enemyDataComponent = EntityManager.GetComponentObject<Enemy>(_enemySpawnerEntity);
 
+        Debug.Log("Trying to spawn enemies");
         SpawnEnemies();
     }
 
@@ -39,12 +44,18 @@ public partial class EnemySpawningSystem : SystemBase
 
         int index = 0;
 
-        Entity newEnemy = EntityManager.Instantiate(availableEnemies[index].Prefab);
-        EntityManager.SetComponentData(newEnemy, new LocalTransform
+        for (int i = 0; i < availableEnemies.Count; i++)
         {
-            Position = float3.zero,
-            Rotation = quaternion.identity,
-            Scale = 1
-        });
+            Entity newEnemy = EntityManager.Instantiate(availableEnemies[i].Prefab);
+            Debug.Log("Spawned enemy");
+            EntityManager.SetComponentData(newEnemy, new LocalTransform
+            {
+                Position = new Vector3(_enemySpawnerComponent.EnemyLocation.x + i * SpawnOffset, _enemySpawnerComponent.EnemyLocation.y, _enemySpawnerComponent.EnemyLocation.z) ,
+                Rotation = quaternion.identity,
+                Scale = 1
+            });
+
+            EntityManager.AddComponentData(newEnemy, new EnemyComponent() { }); 
+        }
     }
 }
