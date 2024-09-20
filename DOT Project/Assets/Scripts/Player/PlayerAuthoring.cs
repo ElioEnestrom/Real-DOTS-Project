@@ -10,6 +10,7 @@ public class PlayerAuthoring : MonoBehaviour
     public float MoveSpeed;
     public GameObject ProjectilePrefab;
 
+    
     class PlayerAuthoringBaker : Baker<PlayerAuthoring>
     {
         public override void Bake(PlayerAuthoring authoring)

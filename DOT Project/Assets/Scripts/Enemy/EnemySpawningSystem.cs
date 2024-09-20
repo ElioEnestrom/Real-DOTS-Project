@@ -13,9 +13,19 @@ public partial class EnemySpawningSystem : SystemBase
     private Enemy _enemyDataComponent;
     private Entity _enemySpawnerEntity;
     private const float SpawnOffset = 2.5f;
+    private float _respawning, _newRespawningTime = 0f;
 
     protected override void OnUpdate()
     {
+        if(_respawning >= _newRespawningTime)
+        {
+            SpawnEnemies();
+            _newRespawningTime = _respawning + 5f;
+        }
+        Debug.Log(_respawning);
+        Debug.Log(_newRespawningTime);
+
+        _respawning = _respawning += UnityEngine.Time.deltaTime;
     }
 
     protected override void OnStartRunning()
@@ -30,7 +40,6 @@ public partial class EnemySpawningSystem : SystemBase
         _enemyDataComponent = EntityManager.GetComponentObject<Enemy>(_enemySpawnerEntity);
 
         Debug.Log("Trying to spawn enemies");
-        SpawnEnemies();
     }
 
     private void SpawnEnemies()
